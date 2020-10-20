@@ -1,0 +1,43 @@
+<h2>Hello {{username}}!</h2>
+
+<form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword(changePasswordForm.value)" class="profileContainer">
+  <mat-form-field appearance="fill">
+    <mat-label for="oldPassword">Old Password</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      id="oldPassword" type="text" formControlName="oldPassword"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label for="newPassword">New Password</mat-label>
+    <input
+      matInput
+      [type]="hide ? 'password' : 'text'"
+      id="newPassword" type="text" formControlName="newPassword"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="button changeButton">Change!</button>
+</form>
+
+<button mat-raised-button class="button " (click)="onDelete()">Delete User</button>
+<button mat-raised-button color="accent" class="button " (click)="onLogOut()">Log out</button>

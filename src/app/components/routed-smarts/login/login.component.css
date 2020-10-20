@@ -1,0 +1,16 @@
+.loginContainer {
+  margin: 0 auto;
+  width: 50%;
+}
+
+.mat-raised-button {
+  display: inline;
+  margin: 10px 0;
+  padding: 10px;
+  width: 50%;
+}
+
+.mat-form-field {
+  display: block;
+  width: 100%;
+}
