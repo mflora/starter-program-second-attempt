@@ -1,13 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {RegisterReplyModalComponent} from '../../smarts/register-reply-modal/register-reply-modal.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AppComponent} from '../../../app.component';
-import {HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 
 @Component({
@@ -40,9 +37,6 @@ export class LoginComponent implements OnInit {
     this.username = loginData.username;
     this.password = loginData.password;
 
-    console.log('submit: ' + this.username + ' ' + this.password);
-    console.log('register: ' + this.registerBoolean);
-
     const body = {username: this.username, password: this.password};
     if (this.registerBoolean) {
       this.register(body);
@@ -62,14 +56,12 @@ export class LoginComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.username = result;
     });
   }
 
   login(body) {
     this.httpClient.post<{access_token: string}>('http://localhost:3000/auth/login', body).subscribe(({access_token}) => {
-      console.log(access_token);
       if (access_token){
         this.myStorage.setItem('token', access_token);
         this.router.navigateByUrl('/profile/' + this.username);
@@ -79,7 +71,6 @@ export class LoginComponent implements OnInit {
 
   register(body) {
     this.httpClient.post('http://localhost:3000/register', body).subscribe(value => {
-      console.log(value);
     });
   }
 }

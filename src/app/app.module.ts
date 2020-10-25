@@ -9,7 +9,6 @@ import { InputEmailContainerComponent } from './components/containers/input-emai
 import { InputNumberContainerComponent } from './components/containers/input-number-container/input-number-container.component';
 import { InputPasswordContainerComponent } from './components/containers/input-password-container/input-password-container.component';
 import { ButtonContainerComponent } from './components/containers/button-container/button-container.component';
-import { ContainersDemoComponent } from './components/containers-demo/containers-demo.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -30,7 +29,6 @@ import {httpInterceptorProviders} from './http-interceptors';
     InputNumberContainerComponent,
     InputPasswordContainerComponent,
     ButtonContainerComponent,
-    ContainersDemoComponent,
     ProfileComponent,
     LoginComponent,
     RegisterReplyModalComponent,
