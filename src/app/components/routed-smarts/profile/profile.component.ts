@@ -13,7 +13,8 @@ export class ProfileComponent implements OnInit {
   changePasswordForm;
   myStorage;
   @Input() username = '';
-  hide = true;
+  hidePassword = true;
+  hideNewPassword = true;
 
   constructor(private userService: UserService, private httpClient: HttpClient, private router: Router, private formBuilder: FormBuilder, private route: ActivatedRoute) {
     this.changePasswordForm = this.formBuilder.group({
