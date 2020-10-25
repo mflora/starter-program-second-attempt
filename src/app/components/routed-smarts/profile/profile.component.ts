@@ -58,13 +58,7 @@ export class ProfileComponent implements OnInit {
 
   onLogOut() {
     this.router.navigateByUrl('/');
-    this.clearStorage();
-  }
-
-  clearStorage() {
-    this.myStorage.setItem('username', '');
-    this.myStorage.setItem('password', '');
-    this.myStorage.setItem('token', '');
+    this.myStorage.clear();
   }
 }
 
