@@ -1,6 +1,6 @@
 <h2>Hello {{username}}!</h2>
 
-<form [formGroup]="changePasswordForm" (ngSubmit)="onChangePassword(changePasswordForm.value)" class="profileContainer">
+<form [formGroup]="changePasswordForm" class="profileContainer">
   <mat-form-field appearance="fill">
     <mat-label for="oldPassword">Old Password</mat-label>
     <input
@@ -36,7 +36,7 @@
     </button>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" class="button changeButton">Change!</button>
+  <button mat-raised-button color="primary" class ="button changeButton" (click)="onChangePassword(changePasswordForm.value)" >Change!</button>
 </form>
 
 <button mat-raised-button class="button " (click)="onDelete()">Delete User</button>
