@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterReplyModalComponent } from './components/smarts/register-reply-modal/register-reply-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {httpInterceptorProviders} from './http-interceptors';
+import { ErrorModalComponent } from './components/smarts/error-modal/error-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {httpInterceptorProviders} from './http-interceptors';
     ProfileComponent,
     LoginComponent,
     RegisterReplyModalComponent,
+    ErrorModalComponent,
   ],
   imports: [
     BrowserModule,
