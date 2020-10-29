@@ -9,7 +9,6 @@ import { InputEmailContainerComponent } from './components/containers/input-emai
 import { InputNumberContainerComponent } from './components/containers/input-number-container/input-number-container.component';
 import { InputPasswordContainerComponent } from './components/containers/input-password-container/input-password-container.component';
 import { ButtonContainerComponent } from './components/containers/button-container/button-container.component';
-import { ContainersDemoComponent } from './components/containers-demo/containers-demo.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -21,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterReplyModalComponent } from './components/smarts/register-reply-modal/register-reply-modal.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {httpInterceptorProviders} from './http-interceptors';
+import { ErrorModalComponent } from './components/smarts/error-modal/error-modal.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +30,10 @@ import {httpInterceptorProviders} from './http-interceptors';
     InputNumberContainerComponent,
     InputPasswordContainerComponent,
     ButtonContainerComponent,
-    ContainersDemoComponent,
     ProfileComponent,
     LoginComponent,
     RegisterReplyModalComponent,
+    ErrorModalComponent,
   ],
   imports: [
     BrowserModule,

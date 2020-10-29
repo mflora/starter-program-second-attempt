@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContainersDemoComponent } from './containers-demo.component';
+import { ErrorModalComponent } from './error-modal.component';
 
-describe('ContainersDemoComponent', () => {
-  let component: ContainersDemoComponent;
-  let fixture: ComponentFixture<ContainersDemoComponent>;
+describe('ErrorModalComponent', () => {
+  let component: ErrorModalComponent;
+  let fixture: ComponentFixture<ErrorModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ContainersDemoComponent ]
+      declarations: [ ErrorModalComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ContainersDemoComponent);
+    fixture = TestBed.createComponent(ErrorModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

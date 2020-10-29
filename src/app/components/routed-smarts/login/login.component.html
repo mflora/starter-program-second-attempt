@@ -1,4 +1,4 @@
-<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit(checkoutForm.value)" class="loginContainer">
+<form [formGroup]="checkoutForm" class="loginContainer">
   <mat-form-field appearance="fill">
     <mat-label for="username">Username</mat-label>
     <input matInput id="username" type="text" formControlName="username">
@@ -22,33 +22,7 @@
     </button>
   </mat-form-field>
 
-  <button mat-raised-button color="primary" class="button">Login</button>
-  <button mat-raised-button class="button" (click)="registerBoolean = true">Register</button>
+  <button mat-raised-button color="primary" class="button" (click)="onLogin(checkoutForm.value)" >Login</button>
+  <button mat-raised-button class="button" (click)="onRegister(checkoutForm.value)">Register</button>
 
 </form>
-
-<!--<form (submit)="onSubmit()" class="loginContainer">-->
-<!--  <app-input-text-container-->
-<!--    [(ngModel)]="username"-->
-<!--    name="username"-->
-<!--    simpleInputLabel="Username"-->
-<!--  ></app-input-text-container>-->
-<!--  <br />-->
-<!--  <app-input-password-container-->
-<!--    [(ngModel)]="password"-->
-<!--    (content)="password"-->
-<!--    name="password"-->
-<!--    passwordLabel="Password"-->
-<!--  ></app-input-password-container>-->
-<!--  <br />-->
-<!--  <app-button-container-->
-<!--    (click)="onSubmit()"-->
-<!--    type="submit"-->
-<!--    buttonLabel="Login"-->
-<!--  ></app-button-container>-->
-<!--</form>-->
-<!--<form>
-  <input [(ngModel)]="username" name="username" />
-  <input [(ngModel)]="password" name="password" />
-  <button (click)="onSubmit()">Login</button>
-</form>-->

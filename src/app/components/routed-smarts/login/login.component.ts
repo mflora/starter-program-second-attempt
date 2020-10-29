@@ -1,13 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {RegisterReplyModalComponent} from '../../smarts/register-reply-modal/register-reply-modal.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AppComponent} from '../../../app.component';
-import {HttpClient, HttpEvent, HttpInterceptor, HttpHandler, HttpRequest} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import {ErrorModalComponent} from '../../smarts/error-modal/error-modal.component';
 
 
 @Component({
@@ -17,14 +15,13 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit {
   checkoutForm;
-  public registerBoolean = false;
   username = '';
   password = '';
   myStorage;
 
   hide = true;
 
-  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, private httpClient: HttpClient, private router: Router,
+  constructor(private formBuilder: FormBuilder, public dialog: MatDialog, public errorDialog: MatDialog, private httpClient: HttpClient, private router: Router,
               private userService: UserService) {
     this.checkoutForm = this.formBuilder.group({
       username: '',
@@ -36,50 +33,51 @@ export class LoginComponent implements OnInit {
     this.myStorage = window.localStorage;
   }
 
-  onSubmit(loginData) {
-    this.username = loginData.username;
-    this.password = loginData.password;
+  onLogin(loginData) {
+      this.login({username: loginData.username, password: loginData.password});
+  }
 
-    console.log('submit: ' + this.username + ' ' + this.password);
-    console.log('register: ' + this.registerBoolean);
-
-    const body = {username: this.username, password: this.password};
-    if (this.registerBoolean) {
-      this.register(body);
-      this.openDialog(this.username);
-    } else {
-      this.login(body);
-    }
-
-    this.registerBoolean = false;
+  onRegister(registerData) {
+    this.myStorage.setItem('username', registerData.username);
+    this.register({username: registerData.username, password: registerData.password});
   }
 
 
   openDialog(username): void {
     const dialogRef = this.dialog.open(RegisterReplyModalComponent, {
       width: '2500px',
-      data: {username: this.username, password: this.password}
+      data: {username: this.myStorage.username, password: this.password}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.username = result;
     });
   }
 
-  login(body) {
-    this.httpClient.post<{access_token: string}>('http://localhost:3000/auth/login', body).subscribe(({access_token}) => {
-      console.log(access_token);
-      if (access_token){
-        this.myStorage.setItem('token', access_token);
-        this.router.navigateByUrl('/profile/' + this.username);
-      }
+  openErrorDialog(message): void {
+    const dialogRef = this.errorDialog.open(ErrorModalComponent, {
+      width: '2500px',
+      data: {errorMessage: message}
     });
+  }
+
+  login(body) {
+      this.httpClient.post<{ access_token: string }>('http://localhost:3000/auth/login', body).subscribe(({access_token}) => {
+          this.myStorage.setItem('token', access_token);
+          this.myStorage.setItem('username', body.username);
+          this.router.navigateByUrl('/profile/' + this.myStorage.username);
+      }, (error => {
+        this.openErrorDialog(error.error.message);
+      })
+);
   }
 
   register(body) {
     this.httpClient.post('http://localhost:3000/register', body).subscribe(value => {
-      console.log(value);
-    });
+      this.openDialog(this.myStorage.username);
+    }, (error => {
+      this.myStorage.clear();
+      this.openErrorDialog(error.error.message);
+    }));
   }
 }
